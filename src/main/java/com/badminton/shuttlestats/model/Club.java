@@ -1,20 +1,24 @@
 package com.badminton.shuttlestats.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name = "club")
 public class Club {
 
     @Id
     @GeneratedValue
+    @Column(name = "club_id")
     private Long clubId;
 
+    @Column(name = "name")
     private String clubName;
+    @Column(name = "creation_date")
     private Date creationDate;
-    private Long organizerId;
+
+    @Column(name = "public_visibility")
+    private Boolean publicVisibility;
 
     public Club() {}
 
@@ -22,14 +26,14 @@ public class Club {
         this.clubId = club.getClubId();
         this.clubName = club.getClubName();
         this.creationDate = club.getCreationDate();
-        this.organizerId = club.getOrganizerId();
+        this.publicVisibility =club.getPublicVisibility();
     }
 
-    public Club(Long clubId, String clubName, Date creationDate, Long organizerId) {
+    public Club(Long clubId, String clubName, Date creationDate, boolean publicVisibility) {
         this.clubId = clubId;
         this.clubName = clubName;
         this.creationDate = creationDate;
-        this.organizerId = organizerId;
+        this.publicVisibility = publicVisibility;
     }
 
     public Long getClubId() {
@@ -56,13 +60,11 @@ public class Club {
         this.creationDate = creationDate;
     }
 
-    public Long getOrganizerId() {
-        return organizerId;
+    public Boolean getPublicVisibility() {
+        return publicVisibility;
     }
 
-    public void setOrganizerId(Long organizerId) {
-        this.organizerId = organizerId;
+    public void setPublicVisibility(Boolean publicVisibility) {
+        this.publicVisibility = publicVisibility;
     }
-
-
 }

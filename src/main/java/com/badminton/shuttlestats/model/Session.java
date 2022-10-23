@@ -1,53 +1,43 @@
 package com.badminton.shuttlestats.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
+
 @Entity
-public class Session {
+@Table(name = "session")
+public class Session implements Serializable {
 
-    @Id
-    @GeneratedValue
-    private Long sessionId;
+    @EmbeddedId
+    private sessionId sessionId;
 
-    private Long clubId;
-
+    @Column(name = "session_date")
     private Date sessionDate;
 
+    @Column(name = "session_location")
     private String sessionLocation;
 
     public Session() {}
 
     public Session(Session session) {
-        this.sessionId = session.sessionId;
-        this.clubId = session.clubId;
-        this.sessionDate = session.sessionDate;
-        this.sessionLocation = session.sessionLocation;
+        this.sessionId = session.getSessionId();
+        this.sessionDate = session.getSessionDate();
+        this.sessionLocation = session.getSessionLocation();
     }
 
-    public Session(Long sessionId, Long clubId, Date sessionDate, String sessionLocation) {
+    public Session(sessionId sessionId, Date sessionDate, String sessionLocation) {
         this.sessionId = sessionId;
-        this.clubId = clubId;
         this.sessionDate = sessionDate;
         this.sessionLocation = sessionLocation;
     }
 
-    public Long getSessionId() {
+    public sessionId getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(Long sessionId) {
+    public void setSessionId(sessionId sessionId) {
         this.sessionId = sessionId;
-    }
-
-    public Long getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
     }
 
     public Date getSessionDate() {

@@ -3,19 +3,19 @@ package com.badminton.shuttlestats.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PLAYERS")
+@Table(name = "player")
 public class Player {
 
     @Id
     @GeneratedValue
-    @Column(name = "PLAYERID")
+    @Column(name = "player_id")
     private Long playerId;
 
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String playerName;
-    @Column(name = "GENDER")
+    @Column(name = "gender")
     private String playerGender;
-    @Column(name = "MAINHAND")
+    @Column(name = "main_hand")
     private String playerMainHand;
 
     public Player() {}

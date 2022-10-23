@@ -55,7 +55,6 @@ public class Match {
         this.clubId = match.getClubId();
         this.matchDate = match.getMatchDate();
         this.matchType = match.getMatchType();
-
     }
 
     public Long getMatchId() {
