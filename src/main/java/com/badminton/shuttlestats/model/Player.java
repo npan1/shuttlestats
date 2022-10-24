@@ -12,25 +12,25 @@ public class Player {
     private Long playerId;
 
     @Column(name = "name")
-    private String playerName;
+    private String name;
     @Column(name = "gender")
-    private String playerGender;
+    private String gender;
     @Column(name = "main_hand")
-    private String playerMainHand;
+    private String mainHand;
 
     public Player() {}
 
     public Player(Player player) {
-        this.playerName = player.getPlayerName();
-        this.playerGender = player.getPlayerGender();
-        this.playerMainHand = player.getPlayerMainHand();
+        this.name = player.getPlayerName();
+        this.gender = player.getPlayerGender();
+        this.mainHand = player.getPlayerMainHand();
     }
 
     public Player(Long playerId, String playerName, String playerGender, String playerMainHand) {
         this.playerId = playerId;
-        this.playerName = playerName;
-        this.playerGender = playerGender;
-        this.playerMainHand = playerMainHand;
+        this.name = playerName;
+        this.gender = playerGender;
+        this.mainHand = playerMainHand;
     }
 
     public Long getPlayerId() {
@@ -42,27 +42,27 @@ public class Player {
     }
 
     public String getPlayerName() {
-        return playerName;
+        return name;
     }
 
     public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+        this.name = playerName;
     }
 
     public String getPlayerGender() {
-        return playerGender;
+        return gender;
     }
 
     public void setPlayerGender(String playerGender) {
-        this.playerGender = playerGender;
+        this.gender = playerGender;
     }
 
     public String getPlayerMainHand() {
-        return playerMainHand;
+        return mainHand;
     }
 
     public void setPlayerMainHand(String playerMainHand) {
-        this.playerMainHand = playerMainHand;
+        this.mainHand = playerMainHand;
     }
 }
 

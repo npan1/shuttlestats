@@ -6,7 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface PlayerRepository extends CrudRepository<Player, Long> {
-    List<Player> findByplayerName(String Name);
-    List<Player> findByplayerGender(String Gender);
-    List<Player> findByplayerMainHand(String mainHand);
+    List<Player> findByName(String Name);
+    List<Player> findByGender(String Gender);
+    List<Player> findByMainHand(String mainHand);
+    List<Player> findBymainHandAndGender(String mainHand, String Gender);
 }

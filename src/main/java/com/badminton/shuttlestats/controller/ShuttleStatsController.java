@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/shuttlestats")
@@ -24,23 +25,26 @@ public class ShuttleStatsController {
         this.matchRepository = matchRepository;
     }
 
+
+    /*
     @GetMapping(path = "/players")
     public Iterable<Player> getAllPlayers() {
         return playerRepository.findAll();
     }
+    */
 
-    @GetMapping(path = "/players/mainhand={mainhand}")
-    public List<Player> getPlayersByMainHand(@PathVariable String mainhand) {
-        List<Player> playerList;
-        if (mainhand == "right") {
-            playerList = playerRepository.findByplayerMainHand("R");
-        } else if (mainhand == "left") {
-            playerList = playerRepository.findByplayerMainHand("L");
+    @GetMapping(path = {"/players" ,"/players/hand={mainhand}&gender={gender}"})
+    public List<Player> getPlayers(@PathVariable (required=false) Optional<String> mainhand, @PathVariable(required = false) Optional<String> gender) {
+
+        if (mainhand.isPresent() && gender.isPresent()) {
+            return playerRepository.findBymainHandAndGender(mainhand.get(), gender.get());
+        } else if (mainhand.isPresent() && gender.isEmpty()) {
+            return playerRepository.findByMainHand(mainhand.get());
+        } else if (mainhand.isEmpty() && gender.isPresent()) {
+            return playerRepository.findByGender(gender.get());
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unable to find players by hand input");
+            return (List<Player>) playerRepository.findAll();
         }
-        return playerList;
-
     }
 
     @PostMapping("players")
