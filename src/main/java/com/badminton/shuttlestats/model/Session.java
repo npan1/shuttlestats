@@ -10,7 +10,7 @@ import java.sql.Date;
 public class Session implements Serializable {
 
     @EmbeddedId
-    private sessionId sessionId;
+    private SessionId sessionId;
 
     @Column(name = "session_date")
     private Date sessionDate;
@@ -26,17 +26,17 @@ public class Session implements Serializable {
         this.sessionLocation = session.getSessionLocation();
     }
 
-    public Session(sessionId sessionId, Date sessionDate, String sessionLocation) {
+    public Session(SessionId sessionId, Date sessionDate, String sessionLocation) {
         this.sessionId = sessionId;
         this.sessionDate = sessionDate;
         this.sessionLocation = sessionLocation;
     }
 
-    public sessionId getSessionId() {
+    public SessionId getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(sessionId sessionId) {
+    public void setSessionId(SessionId sessionId) {
         this.sessionId = sessionId;
     }
 

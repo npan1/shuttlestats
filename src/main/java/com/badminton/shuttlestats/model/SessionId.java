@@ -3,23 +3,23 @@ package com.badminton.shuttlestats.model;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import java.io.Serializable;
-import java.util.Objects;
+
 
 @Embeddable
-public class sessionId implements Serializable {
+public class SessionId implements Serializable {
 
     @GeneratedValue
     private Long sessionId;
     private Long clubId;
 
-    public sessionId() {};
+    public SessionId() {};
 
-    public sessionId(sessionId sessionId) {
+    public SessionId(SessionId sessionId) {
         this.sessionId = sessionId.getSessionId();
         this.clubId = sessionId.getClubId();
     }
 
-    public sessionId(Long sessionId, Long clubId) {
+    public SessionId(Long sessionId, Long clubId) {
         this.sessionId = sessionId;
         this.clubId = clubId;
     }
@@ -45,7 +45,7 @@ public class sessionId implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        sessionId sessionId1 = (sessionId) o;
+        SessionId sessionId1 = (SessionId) o;
 
         if (!sessionId.equals(sessionId1.sessionId)) return false;
         return clubId.equals(sessionId1.clubId);

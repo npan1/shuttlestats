@@ -1,5 +1,6 @@
 package com.badminton.shuttlestats.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,51 +11,59 @@ public class Match {
 
     @Id
     @GeneratedValue
+    @Column(name = "match_id")
     private Long matchId;
 
-    private Long clubId;
+    @Id
+    @Column(name = "session_id")
+    private Long sessionId;
 
-    private Date matchDate;
-
+    @Id
+    @Column(name = "match_type")
     private String matchType;
 
-    /*
-    Need to figure out how to divide up players into two different teams.
-    Is possible to have the following configurations
-
-    (Team1 vs Team2) Player1 vs Player2
-    OR
-    (Team1 vs Team2) Player1+Player2 vs Player3+Player4
-
-    What would be the optimal way of storing how players are divided in teams,
-    would it affect how the data is stored in the database?
-
-    private String playerOne;
-    private String playerTwo;
-    private String playerThree;
-    private String playerFour;
-    */
-
+    @Column(name = "player_one_id")
     private Long playerOneId;
 
+    @Column(name = "player_two_id")
     private Long playerTwoId;
 
+    @Column(name = "player_three_id")
     private Long playerThreeId;
 
+    @Column(name = "player_four_id")
     private Long playerFourId;
 
-    private Integer winningTeam;
-
+    @Column(name = "team_one_score")
     private Integer teamOneScore;
+
+    @Column(name = "team_two_score")
     private Integer teamTwoScore;
 
     public Match() {}
 
     public Match(Match match) {
         this.matchId = match.getMatchId();
-        this.clubId = match.getClubId();
-        this.matchDate = match.getMatchDate();
+        this.sessionId = match.getMatchId();
         this.matchType = match.getMatchType();
+        this.playerOneId = match.getPlayerOneId();
+        this.playerTwoId = match.getPlayerTwoId();
+        this.playerThreeId = match.getPlayerThreeId();
+        this.playerFourId = match.getPlayerFourId();
+        this.teamOneScore = match.getTeamOneScore();
+        this.teamTwoScore = match.getTeamTwoScore();
+    }
+
+    public Match(Long matchId, Long sessionId, String matchType, Long playerOneId, Long playerTwoId, Long playerThreeId, Long playerFourId, Integer teamOneScore, Integer teamTwoScore) {
+        this.matchId = matchId;
+        this.sessionId = sessionId;
+        this.matchType = matchType;
+        this.playerOneId = playerOneId;
+        this.playerTwoId = playerTwoId;
+        this.playerThreeId = playerThreeId;
+        this.playerFourId = playerFourId;
+        this.teamOneScore = teamOneScore;
+        this.teamTwoScore = teamTwoScore;
     }
 
     public Long getMatchId() {
@@ -65,20 +74,12 @@ public class Match {
         this.matchId = matchId;
     }
 
-    public Long getClubId() {
-        return clubId;
+    public Long getSessionId() {
+        return sessionId;
     }
 
-    public void setClubId(Long clubId) {
-        this.clubId = clubId;
-    }
-
-    public Date getMatchDate() {
-        return matchDate;
-    }
-
-    public void setMatchDate(Date matchDate) {
-        this.matchDate = matchDate;
+    public void setSessionId(Long sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getMatchType() {
@@ -119,14 +120,6 @@ public class Match {
 
     public void setPlayerFourId(Long playerFourId) {
         this.playerFourId = playerFourId;
-    }
-
-    public Integer getWinningTeam() {
-        return winningTeam;
-    }
-
-    public void setWinningTeam(Integer winningTeam) {
-        this.winningTeam = winningTeam;
     }
 
     public Integer getTeamOneScore() {
