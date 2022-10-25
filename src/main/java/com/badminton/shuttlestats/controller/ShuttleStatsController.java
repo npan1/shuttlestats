@@ -33,7 +33,7 @@ public class ShuttleStatsController {
     }
     */
 
-    @GetMapping(path = {"/players" ,"/players/hand={mainhand}&gender={gender}"})
+    @GetMapping(path = {"/players" , "/players/hand={mainhand}", "/players/gender={gender}","/players/hand={mainhand}&gender={gender}"})
     public List<Player> getPlayers(@PathVariable (required=false) Optional<String> mainhand, @PathVariable(required = false) Optional<String> gender) {
 
         if (mainhand.isPresent() && gender.isPresent()) {
