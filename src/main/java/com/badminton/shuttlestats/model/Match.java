@@ -1,24 +1,14 @@
 package com.badminton.shuttlestats.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Match {
+public class Match implements Serializable {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "match_id")
-    private Long matchId;
+    @EmbeddedId
+    private MatchId matchId;
 
-    @Id
-    @Column(name = "session_id")
-    private Long sessionId;
-
-    @Id
     @Column(name = "match_type")
     private String matchType;
 
@@ -44,7 +34,6 @@ public class Match {
 
     public Match(Match match) {
         this.matchId = match.getMatchId();
-        this.sessionId = match.getMatchId();
         this.matchType = match.getMatchType();
         this.playerOneId = match.getPlayerOneId();
         this.playerTwoId = match.getPlayerTwoId();
@@ -54,9 +43,8 @@ public class Match {
         this.teamTwoScore = match.getTeamTwoScore();
     }
 
-    public Match(Long matchId, Long sessionId, String matchType, Long playerOneId, Long playerTwoId, Long playerThreeId, Long playerFourId, Integer teamOneScore, Integer teamTwoScore) {
+    public Match(MatchId matchId, Long sessionId, String matchType, Long playerOneId, Long playerTwoId, Long playerThreeId, Long playerFourId, Integer teamOneScore, Integer teamTwoScore) {
         this.matchId = matchId;
-        this.sessionId = sessionId;
         this.matchType = matchType;
         this.playerOneId = playerOneId;
         this.playerTwoId = playerTwoId;
@@ -66,20 +54,12 @@ public class Match {
         this.teamTwoScore = teamTwoScore;
     }
 
-    public Long getMatchId() {
+    public MatchId getMatchId() {
         return matchId;
     }
 
-    public void setMatchId(Long matchId) {
+    public void setMatchId(MatchId matchId) {
         this.matchId = matchId;
-    }
-
-    public Long getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(Long sessionId) {
-        this.sessionId = sessionId;
     }
 
     public String getMatchType() {
